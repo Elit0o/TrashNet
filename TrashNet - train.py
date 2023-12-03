@@ -3,7 +3,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import os
 import random
 
-train_data_dir = r"C:\Users\Eli\Desktop\train"
+train_data_dir = #data dir
 image_size = (224, 224)
 batch_size = 32
 
@@ -58,8 +58,8 @@ model.fit(
 model.save("trash_classifier_model")
 
 directory_paths = [
-    r"C:\Users\Eli\Desktop\train\0",  # Directory for images containing trash
-     r"C:\Users\Eli\Desktop\train\1"   # Directory for images not containing trash
+   # Directory for images containing trash,
+   # Directory for images not containing trash
 ]
 
 random_directory = random.choice(directory_paths)
@@ -74,7 +74,7 @@ if image_files:
     print("Path to the chosen image:", image_path)
     image = tf.keras.preprocessing.image.load_img(image_path, target_size=image_size)
     image_array = tf.keras.preprocessing.image.img_to_array(image)
-    image_array = tf.expand_dims(image_array, 0)  # Expand dimensions to match batch size
+    image_array = tf.expand_dims(image_array, 0)
 
     image_array /= 255.0
 
