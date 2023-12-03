@@ -1,9 +1,9 @@
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import os
-import random 
+import random
 
-train_data_dir = # data dir 
+train_data_dir = r"C:\Users\Eli\Desktop\train"
 image_size = (224, 224)
 batch_size = 32
 
@@ -28,7 +28,6 @@ validation_data = train_datagen.flow_from_directory(
     subset='validation'
 )
 
-# Model Creation
 base_model = tf.keras.applications.MobileNetV2(
     input_shape=(224, 224, 3),
     include_top=False,
@@ -43,14 +42,12 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(1, activation="sigmoid")
 ])
 
-# Model Compilation
 model.compile(
     optimizer=tf.keras.optimizers.Adam(),
     loss=tf.keras.losses.BinaryCrossentropy(),
     metrics=["accuracy"]
 )
 
-# Model Training
 epochs = 10
 model.fit(
     train_data,
@@ -61,7 +58,8 @@ model.fit(
 model.save("trash_classifier_model")
 
 directory_paths = [
-   # Directory for images
+    r"C:\Users\Eli\Desktop\train\0",  # Directory for images containing trash
+     r"C:\Users\Eli\Desktop\train\1"   # Directory for images not containing trash
 ]
 
 random_directory = random.choice(directory_paths)
@@ -76,7 +74,7 @@ if image_files:
     print("Path to the chosen image:", image_path)
     image = tf.keras.preprocessing.image.load_img(image_path, target_size=image_size)
     image_array = tf.keras.preprocessing.image.img_to_array(image)
-    image_array = tf.expand_dims(image_array, 0)
+    image_array = tf.expand_dims(image_array, 0)  # Expand dimensions to match batch size
 
     image_array /= 255.0
 
