@@ -3,11 +3,10 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import os
 import random
 
-test_data_dir = r"C:\Users\Eli\Desktop\test"
+test_data_dir = #data dir
 image_size = (224, 224)
 
-model = tf.keras.models.load_model(r"C:\Users\Eli\AppData\Roaming\JetBrains\PyCharmCE2022.1\scratches"
-                                   r"\trash_classifier_model")  # Load your trained model
+model = tf.keras.models.load_model(# Load your trained model)  
 
 image_files = os.listdir(test_data_dir)
 image_extensions = ('.jpg', '.jpeg', '.png', '.bmp')
