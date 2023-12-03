@@ -6,22 +6,15 @@ import random
 test_data_dir = #data dir
 image_size = (224, 224)
 
-model = tf.keras.models.load_model(# Load your trained model)  
+model = tf.keras.models.load_model( # Load your trained model) 
 
 image_files = os.listdir(test_data_dir)
 image_extensions = ('.jpg', '.jpeg', '.png', '.bmp')
 
-trash_images = [file for file in image_files if 'trash' in file.lower() and file.lower().endswith(image_extensions)]
-non_trash_images = [file for file in image_files if 'trash' not in file.lower() and file.lower().endswith(image_extensions)]
+valid_images = [file for file in image_files if file.lower().endswith(image_extensions)]
 
-if trash_images or non_trash_images:
-    if trash_images:
-        random_image = random.choice(trash_images)
-        prediction_label = "contains trash"
-    else:
-        random_image = random.choice(non_trash_images)
-        prediction_label = "does not contain trash"
-
+if valid_images:
+    random_image = random.choice(valid_images)
     image_path = os.path.join(test_data_dir, random_image)
     print("Path to the chosen image:", image_path)
 
@@ -32,8 +25,8 @@ if trash_images or non_trash_images:
 
     prediction = model.predict(image_array)
     if prediction[0][0] < 0.5:
-        print(f"The image {prediction_label}")
+        print("The image contains trash")
     else:
-        print(f"The image {prediction_label}")
+        print("The image does not contain trash")
 else:
-    print("No image files found in the selected directory")
+    print("No valid image files found in the selected directory")
